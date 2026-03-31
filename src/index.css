@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+
+html, body {
+  background-color: #000000;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  
+}
+
+
+h1 {
+  @apply text-3xl font-bold mb-4;
+}
+
+h2 {
+  @apply text-2xl font-bold mb-4 text-amber-400;
+}
+
+h3 {
+  @apply text-xl font-bold mb-4 text-cyan-500;
+}
+
+p {
+  @apply mb-4;
+}
+
+ul {
+  @apply list-disc list-inside;
+}
+
+strong {
+  @apply font-bold text-cyan-400 text-lg;
+}
+
+em {
+  @apply italic text-pink-500;
+}
+
+
+.btn-primary {
+  @apply bg-cyan-600 text-white font-bold py-2 px-4 rounded-xl hover:bg-cyan-700 transition-all duration-200 ease-in-out;
+}
+
+.btn-primary:disabled {
+  @apply bg-cyan-600/50 text-white font-bold py-2 px-4 rounded-xl cursor-not-allowed;
+}
+
+.chat-container {
+  @apply flex flex-col flex-auto shrink-0 rounded-2xl bg-white/5 h-full p-4;
+}
+
+.chat-messages {
+  @apply flex flex-col h-full overflow-x-auto mb-4 overflow-y-auto;
+}
+
+
+/* Animations */
+
+.fade-in { animation: fadeIn .3s; }
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
