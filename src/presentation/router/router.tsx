@@ -5,9 +5,7 @@ import {
   ProsConsStreamPage,
   TranslatePage,
   TextToAudioPage,
-  ImageTunningPage,
   AudioToTextPage,
-  AssistantPage,
   ImageGenerationPage,
 } from '../pages';
 import { DashboardLayout } from '../layouts/DashboardLayout';
