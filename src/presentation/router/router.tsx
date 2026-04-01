@@ -5,7 +5,9 @@ import {
   ProsConsStreamPage,
   TranslatePage,
   TextToAudioPage,
+  ImageTunningPage,
   AudioToTextPage,
+  AssistantPage,
   ImageGenerationPage,
 } from '../pages';
 import { DashboardLayout } from '../layouts/DashboardLayout';
@@ -60,7 +62,7 @@ export const menuRoutes = [
     description: 'Generar imágenes',
     component: <ImageGenerationPage />,
   },
-  /* {
+  {
     to: '/image-tunning',
     icon: 'fa-solid fa-wand-magic',
     title: 'Editar imagen',
@@ -73,7 +75,7 @@ export const menuRoutes = [
     title: 'Asistente',
     description: 'Información del asistente',
     component: <AssistantPage />,
-  }, */
+  },
 ];
 
 export const router = createBrowserRouter([

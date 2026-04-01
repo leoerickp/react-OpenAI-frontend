@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { GptMessage, MyMessage, TypingLoader, TextMessageBox } from '../../components';
+import { GptMessage, MyMessage, TypingLoader, TextMessageBox, GptMessageImage } from '../../components';
 import { useContentScroll } from '../../hooks';
 import { imageGenerationUseCase } from '../../../core/use-cases';
-import { GptMessageImage } from '../../components/chat-bubbles/GptMessageImage';
 
 interface Message {
   text: string;
@@ -46,12 +45,7 @@ export const ImageGenerationPage = () => {
           <GptMessage text="¿Qué imagen deseas generar hoy?" />
           {messages.map((message, index) =>
             message.isGpt ? (
-              <GptMessageImage
-                key={index}
-                text={message.text}
-                imageUrl={message.info?.imageUrl ?? ''}
-                alt={message.info?.alt ?? ''}
-              />
+              <GptMessageImage key={index} imageUrl={message.info?.imageUrl ?? ''} alt={message.info?.alt ?? ''} />
             ) : (
               <MyMessage key={index} text={message.text} />
             ),
