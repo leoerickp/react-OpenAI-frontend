@@ -1,12 +1,5 @@
-import { useState } from 'react';
-import { GptMessage, MyMessage, TextMessageBoxSelect, TypingLoader } from '../../components';
-import { translateTextUseCase } from '../../../core/use-cases/translate-text.use-case';
-import { useContentScroll } from '../../hooks';
-
-interface Message {
-  text: string;
-  isGpt: boolean;
-}
+import { ChatFrameWithSelectBox, GptMessage, MyMessage } from '../../components';
+import { useTranslate } from '../../hooks';
 
 const languages = [
   { id: 'alemán', text: 'Alemán' },
@@ -25,50 +18,19 @@ const languages = [
 ];
 
 export const TranslatePage = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
-  const messagesEndRef = useContentScroll(messages);
-
-  const handlePost = async (text: string, selectedOption: string) => {
-    setIsLoading(true);
-    const newMessage = `Traduce: ${text} al idioma ${selectedOption}`;
-    setMessages(prev => [...prev, { text: newMessage, isGpt: false }]);
-
-    const resp = await translateTextUseCase(text, selectedOption);
-
-    setIsLoading(false);
-
-    if (resp.ok) {
-      setMessages(prev => [...prev, { text: resp.message, isGpt: true }]);
-    } else {
-      setMessages(prev => [...prev, { text: resp.message, isGpt: true }]);
-    }
-  };
+  const { messages, isLoading, handlePost } = useTranslate();
   return (
-    <div className="chat-container">
-      <div className="chat-messages">
-        <div className="grid grid-cols-12 gap-y-2">
-          {/* Welcome */}
-          <GptMessage text="¿Qué quieres que traduzca hoy?" />
-          {messages.map((message, index) =>
-            message.isGpt ? (
-              <GptMessage key={index} text={message.text} />
-            ) : (
-              <MyMessage key={index} text={message.text} />
-            ),
-          )}
-
-          {isLoading && <TypingLoader className="col-start-1 col-end-12 fade-in" />}
-
-          <div ref={messagesEndRef} />
-        </div>
-      </div>
-      <TextMessageBoxSelect
-        onSendMessage={handlePost}
-        placeholder="Escribe aqui lo que deseas..."
-        disableCorrections
-        options={languages}
-      />
-    </div>
+    <ChatFrameWithSelectBox
+      messages={messages}
+      onSendMessage={handlePost}
+      placeholder="Escribe aqui lo que deseas..."
+      options={languages}
+      isLoading={isLoading}
+      initialText="¿Qué quieres que traduzca hoy?"
+    >
+      {messages.map((message, index) =>
+        message.isGpt ? <GptMessage key={index} text={message.text} /> : <MyMessage key={index} text={message.text} />,
+      )}
+    </ChatFrameWithSelectBox>
   );
 };
