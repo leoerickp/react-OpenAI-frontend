@@ -14,16 +14,7 @@ interface Message {
 
 export const ImageTunningPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      text: 'Imagen Base',
-      isGpt: true,
-      info: {
-        imageUrl: 'http://localhost:3000/api/gpt/image-generation/324e1fce-e1a8-4931-8f3b-ae1a44b7d010.png',
-        alt: 'Base Image',
-      },
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [originalImageAndMask, setOriginalImageAndMask] = useState({
     original: undefined as string | undefined,
     originalAlt: undefined as string | undefined,
