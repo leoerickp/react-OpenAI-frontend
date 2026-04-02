@@ -11,8 +11,12 @@ export const ProsConsPage = () => {
       isLoading={isLoading}
       initialText="Hola, puedes escribir lo que quieras que compare y te de mi punto de vista."
     >
-      {messages.map((message, index) =>
-        message.isGpt ? <GptMessage key={index} text={message.text} /> : <MyMessage key={index} text={message.text} />,
+      {messages.map(message =>
+        message.isGpt ? (
+          <GptMessage key={message.id} text={message.text} />
+        ) : (
+          <MyMessage key={message.id} text={message.text} />
+        ),
       )}
     </ChatFrameWithTextBox>
   );

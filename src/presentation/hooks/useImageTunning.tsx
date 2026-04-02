@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { imageVariationUseCase, imageGenerationUseCase } from '../../core/use-cases';
+import { generateId } from '../../config';
 
 interface Message {
+  id: string;
   text: string;
   isGpt: boolean;
   info?: {
@@ -43,7 +45,7 @@ export const useImageTunning = () => {
 
   const handlePost = async (text: string) => {
     setIsLoading(true);
-    setMessages(prev => [...prev, { text, isGpt: false }]);
+    setMessages(prev => [...prev, { id: generateId(), text, isGpt: false }]);
 
     const { mask, original } = originalImageAndMask;
 
@@ -51,11 +53,12 @@ export const useImageTunning = () => {
     setIsLoading(false);
 
     if (!ok) {
-      setMessages(prev => [...prev, { text: errorMessage ?? 'Unknown error', isGpt: true }]);
+      setMessages(prev => [...prev, { id: generateId(), text: errorMessage ?? 'Unknown error', isGpt: true }]);
     } else {
       setMessages(prev => [
         ...prev,
         {
+          id: generateId(),
           text: alt ?? 'Generated image',
           isGpt: true,
           info: { imageUrl: url ?? '', alt: alt ?? '' },

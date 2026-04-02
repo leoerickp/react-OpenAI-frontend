@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react';
 import { prosConsStreamGeneratorUseCase } from '../../core/use-cases';
+import { generateId } from '../../config';
 
 interface Message {
+  id: string;
   text: string;
   isGpt: boolean;
 }
@@ -21,19 +23,21 @@ export const useProsConsStream = () => {
 
     isRunning.current = true;
     setIsLoading(true);
-    setMessages(prev => [...prev, { text, isGpt: false }]);
+    setMessages(prev => [...prev, { id: generateId(), text, isGpt: false }]);
 
     const stream = prosConsStreamGeneratorUseCase(text, abortController.current.signal);
     setIsLoading(false);
 
     if (!stream) return;
 
-    setMessages(prev => [...prev, { text: '', isGpt: true }]);
+    const id = generateId();
+
+    setMessages(prev => [...prev, { id, text: '', isGpt: true }]);
 
     for await (const text of stream) {
       setMessages(prev => {
         // to avoid mutation
-        return prev.map((msg, index) => (index === prev.length - 1 ? { ...msg, text } : msg));
+        return prev.map(msg => (msg.id === id ? { ...msg, text } : msg));
       });
     }
     isRunning.current = false;

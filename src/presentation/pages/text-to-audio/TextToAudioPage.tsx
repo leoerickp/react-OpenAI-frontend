@@ -27,15 +27,15 @@ export const TextToAudioPage = () => {
       isLoading={isLoading}
       initialText={disclaimer}
     >
-      {messages.map((message, index) =>
+      {messages.map(message =>
         message.isGpt ? (
           message.type === 'audio' ? (
-            <GptMessageAudio key={index} text={message.text} audioUrl={message.audioUrl} />
+            <GptMessageAudio key={message.id} text={message.text} audioUrl={message.audioUrl} />
           ) : (
-            <GptMessage key={index} text={message.text} />
+            <GptMessage key={message.id} text={message.text} />
           )
         ) : (
-          <MyMessage key={index} text={message.text} />
+          <MyMessage key={message.id} text={message.text} />
         ),
       )}
     </ChatFrameWithSelectBox>

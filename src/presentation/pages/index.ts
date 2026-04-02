@@ -7,3 +7,4 @@ export * from './pro-cons-stream/ProsConsStreamPage';
 export * from './text-to-audio/TextToAudioPage';
 export * from './translate/TranslatePage';
 export * from './image-generation/ImageGenerationPage';
+export * from './image-generation/ImageTunningPage';

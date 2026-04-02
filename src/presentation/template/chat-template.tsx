@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { ChatFrameWithTextBox, GptMessage, MyMessage } from '../components';
+import { generateId } from '../../config';
 
 interface Message {
+  id: string;
   text: string;
   isGpt: boolean;
 }
@@ -12,7 +14,7 @@ export const ChatTemplate = () => {
 
   const handlePost = async (text: string) => {
     setIsLoading(true);
-    setMessages(prev => [...prev, { text, isGpt: false }]);
+    setMessages(prev => [...prev, { id: generateId(), text, isGpt: false }]);
 
     //Todo UseCase
 
@@ -28,8 +30,12 @@ export const ChatTemplate = () => {
       isLoading={isLoading}
       initialText="Hola, puedes escribir tu texto en español y te ayudo con las correcciones"
     >
-      {messages.map((message, index) =>
-        message.isGpt ? <GptMessage key={index} text={message.text} /> : <MyMessage key={index} text={message.text} />,
+      {messages.map(message =>
+        message.isGpt ? (
+          <GptMessage key={message.id} text={message.text} />
+        ) : (
+          <MyMessage key={message.id} text={message.text} />
+        ),
       )}
     </ChatFrameWithTextBox>
   );

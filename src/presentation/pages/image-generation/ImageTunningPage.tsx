@@ -16,10 +16,10 @@ export const ImageTunningPage = () => {
         isLoading={isLoading}
         initialText="¿Qué imagen deseas generar hoy?"
       >
-        {messages.map((message, index) =>
+        {messages.map(message =>
           message.isGpt ? (
             <GptMessageSelectableImage
-              key={index}
+              key={message.id}
               imageUrl={message.info?.imageUrl ?? ''}
               onImageSelected={maskImageUrl =>
                 setOriginalImageAndMask({
@@ -30,7 +30,7 @@ export const ImageTunningPage = () => {
               }
             />
           ) : (
-            <MyMessage key={index} text={message.text} />
+            <MyMessage key={message.id} text={message.text} />
           ),
         )}
       </ChatFrameWithTextBox>

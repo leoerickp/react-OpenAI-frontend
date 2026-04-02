@@ -5,10 +5,10 @@ import {
   ProsConsStreamPage,
   TranslatePage,
   TextToAudioPage,
-  ImageTunningPage,
   AudioToTextPage,
   AssistantPage,
   ImageGenerationPage,
+  ImageTunningPage,
 } from '../pages';
 import { DashboardLayout } from '../layouts/DashboardLayout';
 

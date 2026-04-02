@@ -11,11 +11,11 @@ export const ImageGenerationPage = () => {
       isLoading={isLoading}
       initialText="¿Qué imagen deseas generar hoy?"
     >
-      {messages.map((message, index) =>
+      {messages.map(message =>
         message.isGpt ? (
-          <GptMessageImage key={index} imageUrl={message.info?.imageUrl ?? ''} alt={message.info?.alt ?? ''} />
+          <GptMessageImage key={message.id} imageUrl={message.info?.imageUrl ?? ''} alt={message.info?.alt ?? ''} />
         ) : (
-          <MyMessage key={index} text={message.text} />
+          <MyMessage key={message.id} text={message.text} />
         ),
       )}
     </ChatFrameWithTextBox>

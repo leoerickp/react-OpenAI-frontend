@@ -12,8 +12,12 @@ export const AudioToTextPage = () => {
       initialText="Hola ¿Qué audio quieres convertir a texto hoy?"
       accept="audio/*"
     >
-      {messages.map((message, index) =>
-        message.isGpt ? <GptMessage key={index} text={message.text} /> : <MyMessage key={index} text={message.text} />,
+      {messages.map(message =>
+        message.isGpt ? (
+          <GptMessage key={message.id} text={message.text} />
+        ) : (
+          <MyMessage key={message.id} text={message.text} />
+        ),
       )}
     </ChatFrameWithFileBox>
   );

@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { textToAudioUseCase } from '../../core/use-cases';
+import { generateId } from '../../config';
 
 interface TextMessage {
+  id: string;
   text: string;
   isGpt: boolean;
   type: 'text';
 }
 
 interface AudioMessage {
+  id: string;
   text: string;
   isGpt: boolean;
   audioUrl?: string;
@@ -22,16 +25,19 @@ export const useTextToAudio = () => {
 
   const handlePost = async (text: string, selectedVoice: string) => {
     setIsLoading(true);
-    setMessages(prev => [...prev, { text, isGpt: false, type: 'text' }]);
+    setMessages(prev => [...prev, { id: generateId(), text, isGpt: false, type: 'text' }]);
 
     const { ok, audioUrl, errorMessage } = await textToAudioUseCase(text, selectedVoice);
 
     setIsLoading(false);
 
     if (ok) {
-      setMessages(prev => [...prev, { text: `${selectedVoice} - ${text}`, isGpt: true, audioUrl, type: 'audio' }]);
+      setMessages(prev => [
+        ...prev,
+        { id: generateId(), text: `${selectedVoice} - ${text}`, isGpt: true, audioUrl, type: 'audio' },
+      ]);
     } else {
-      setMessages(prev => [...prev, { text: errorMessage!, isGpt: true, type: 'text' }]);
+      setMessages(prev => [...prev, { id: generateId(), text: errorMessage!, isGpt: true, type: 'text' }]);
     }
   };
   return { messages, isLoading, handlePost };
