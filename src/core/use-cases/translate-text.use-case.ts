@@ -1,9 +1,9 @@
-import { apiGpt } from "../../config";
+import { api } from "../../config";
 import type { Translate, TranslateResponse } from "../../interfaces";
 
 export const translateTextUseCase = async(prompt: string, lang: string): Promise<Translate> => {
   try {
-      const data = await apiGpt.post('/translate', { prompt, lang }).json<TranslateResponse>();
+      const data = await api.post('/gpt/translate', { prompt, lang }).json<TranslateResponse>();
 
       return {
         ok: true,

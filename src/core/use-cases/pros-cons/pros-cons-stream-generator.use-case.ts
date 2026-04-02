@@ -1,8 +1,8 @@
-import { apiGpt } from "../../config";
+import { api } from "../../../config";
 
 export async function* prosConsStreamGeneratorUseCase(prompt: string, signal: AbortSignal) {
   try {
-    const reader = await apiGpt.post('/pros-cons-discusser-stream', { prompt }, { signal }).stream();
+    const reader = await api.post('/gpt/pros-cons-discusser-stream', { prompt }, { signal }).stream();
 
     if(!reader) return;
 

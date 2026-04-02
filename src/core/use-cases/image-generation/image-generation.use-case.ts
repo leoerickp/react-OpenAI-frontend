@@ -1,9 +1,9 @@
-import { apiGpt } from "../../config";
-import type { ImageGeneration, ImageGenerationResponse } from "../../interfaces";
+import { api } from "../../../config";
+import type { ImageGeneration, ImageGenerationResponse } from "../../../interfaces";
 
 export const imageGenerationUseCase = async(prompt: string, originalImage?: string, maskImage?: string): Promise<ImageGeneration> => {
   try {
-    const data = await apiGpt.post('/image-generation', { prompt, originalImage, maskImage }).json<ImageGenerationResponse>();
+    const data = await api.post('/gpt/image-generation', { prompt, originalImage, maskImage }).json<ImageGenerationResponse>();
 
     return {
       ok: true,

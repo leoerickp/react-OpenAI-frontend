@@ -1,9 +1,9 @@
-import { apiGpt } from "../../config";
-import type { ProsCons, ProsConsResponse } from "../../interfaces";
+import { api } from "../../../config";
+import type { ProsCons, ProsConsResponse } from "../../../interfaces";
 
 export const prosConsUseCase = async (prompt: string): Promise<ProsCons> => {
   try {
-    const data = await apiGpt.post('/pros-cons-discusser', { prompt }).json<ProsConsResponse>();
+    const data = await api.post('/gpt/pros-cons-discusser', { prompt }).json<ProsConsResponse>();
 
     return {
       ok: true,

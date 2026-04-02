@@ -1,9 +1,9 @@
-import { apiGpt } from "../../config";
+import { api } from "../../config";
 import type { Orthography, OrthographyResponse } from "../../interfaces";
 
 export const orthographyUseCase = async (prompt: string): Promise<Orthography> => {
   try {
-    const data = await apiGpt.post('/orthography-check', { prompt }).json<OrthographyResponse>();
+    const data = await api.post('/gpt/orthography-check', { prompt }).json<OrthographyResponse>();
     
     return {
       ok: true,

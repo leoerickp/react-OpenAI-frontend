@@ -1,2 +1,2 @@
-export * from './adapters/api-gpt.adapter';
+export * from './adapters/api.adapter';
 export * from './adapters/generate-id.adapter';

@@ -1,4 +1,4 @@
-import { apiGpt } from "../../config";
+import { api } from "../../config";
 import { type Transcription, type TranscriptionResponse } from "../../interfaces";
 
 export const audioToTextUseCase = async(audioFile: File, prompt?: string): Promise<Transcription> => {
@@ -10,7 +10,7 @@ export const audioToTextUseCase = async(audioFile: File, prompt?: string): Promi
         formData.append('prompt', prompt);
       }
 
-      const data = await apiGpt.post('/audio-to-text', formData).json<TranscriptionResponse>();
+      const data = await api.post('/gpt/audio-to-text', formData).json<TranscriptionResponse>();
 
       
       return {

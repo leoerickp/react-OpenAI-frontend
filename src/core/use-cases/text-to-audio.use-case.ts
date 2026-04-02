@@ -1,9 +1,9 @@
-import { apiGpt } from "../../config";
+import { api } from "../../config";
 import type { Audio } from "../../interfaces";
 
 export const textToAudioUseCase = async(prompt: string, voice: string): Promise<Audio> => {
   try {
-      const res = await apiGpt.post('/text-to-audio', { prompt, voice }).response();
+      const res = await api.post('/gpt/text-to-audio', { prompt, voice }).response();
 
       const audioFile = await res.blob();
       const audioUrl = URL.createObjectURL(audioFile);
