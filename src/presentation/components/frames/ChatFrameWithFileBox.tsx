@@ -10,6 +10,7 @@ interface Props extends PropsWithChildren {
   initialText: string;
   placeholder?: string;
   accept?: string;
+  neverDisableSendButton?: boolean;
 }
 
 export const ChatFrameWithFileBox = ({
@@ -20,13 +21,19 @@ export const ChatFrameWithFileBox = ({
   isLoading,
   initialText,
   accept,
+  neverDisableSendButton = false,
 }: Props) => {
   return (
     <ChatFrame>
       <ChatInternalFrame messages={messages} isLoading={isLoading} initialText={initialText}>
         {children}
       </ChatInternalFrame>
-      <TextMessageBoxFile onSendMessage={onSendMessage} placeholder={placeholder} accept={accept} />
+      <TextMessageBoxFile
+        onSendMessage={onSendMessage}
+        placeholder={placeholder}
+        accept={accept}
+        neverDisableSendButton={neverDisableSendButton}
+      />
     </ChatFrame>
   );
 };

@@ -2,7 +2,6 @@ import { api } from "../../../config";
 import { type ImageToText, type ImageToTextResponse } from "../../../interfaces";
 
 export const imageToTextUseCase = async(imageFile: File, prompt?: string): Promise<ImageToText> => {
-  console.log({prompt, imageFile});
   try {
       const formData = new FormData();
       formData.append('file', imageFile);
@@ -23,6 +22,7 @@ export const imageToTextUseCase = async(imageFile: File, prompt?: string): Promi
         ok: false,
         message: errorMessage,
         url: '',
+        fileName: '',
       }
     }
 }

@@ -9,3 +9,4 @@ export * from './image-generation/image-variation.use-case';
 export * from './assistant/create-thread.use-case';
 export * from './assistant/post-question.use-case';
 export * from './image-generation/image-to-text.use-case';
+export * from './image-generation/image-filename-to-text.use-case';

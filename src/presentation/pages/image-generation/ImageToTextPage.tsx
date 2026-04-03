@@ -1,8 +1,8 @@
-import { ChatFrameWithFileBox, GptMessageImage, MyMessage } from '../../components';
+import { ChatFrameWithFileBox, GptMessage, GptMessageImage, MyMessage } from '../../components';
 import { useImageToText } from '../../hooks';
 
 export const ImageToTextPage = () => {
-  const { messages, isLoading, handlePost } = useImageToText();
+  const { messages, isLoading, handlePost, neverDisableSendButton } = useImageToText();
   return (
     <ChatFrameWithFileBox
       messages={messages}
@@ -11,10 +11,15 @@ export const ImageToTextPage = () => {
       isLoading={isLoading}
       initialText="Hola ¿Qué imagen quieres convertir a texto hoy?"
       accept="image/*"
+      neverDisableSendButton={neverDisableSendButton}
     >
       {messages.map(message =>
         message.isGpt ? (
-          <GptMessageImage key={message.id} imageUrl={message.url ?? ''} alt={message.text} />
+          message.url ? (
+            <GptMessageImage key={message.id} imageUrl={message.url ?? ''} alt={message.text} text={message.text} />
+          ) : (
+            <GptMessage key={message.id} text={message.text} />
+          )
         ) : (
           <MyMessage key={message.id} text={message.text} />
         ),

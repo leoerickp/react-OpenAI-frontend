@@ -15,8 +15,19 @@ export interface ImageToText {
   ok: boolean;
   url: string;
   message: string;
+  fileName: string;
 }
 export interface ImageToTextResponse {
   url: string;
+  message: string;
+  fileName: string;
+}
+
+export interface ImageFilenameToText {
+  ok: boolean;
+  message: string;
+}
+
+export interface ImageFilenameToTextResponse {
   message: string;
 }

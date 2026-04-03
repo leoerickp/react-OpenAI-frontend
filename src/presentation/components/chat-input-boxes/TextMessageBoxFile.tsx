@@ -5,18 +5,25 @@ interface Props {
   placeholder?: string;
   disableCorrections?: boolean;
   accept?: string;
+  neverDisableSendButton?: boolean;
 }
 
-export const TextMessageBoxFile = ({ onSendMessage, placeholder, disableCorrections = false, accept }: Props) => {
+export const TextMessageBoxFile = ({
+  onSendMessage,
+  placeholder,
+  disableCorrections = false,
+  accept,
+  neverDisableSendButton = false,
+}: Props) => {
   const [message, setMessage] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const handleSendMessage = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!selectedFile) return;
+    if (!selectedFile && !neverDisableSendButton) return;
 
-    onSendMessage(message, selectedFile);
+    onSendMessage(message, selectedFile!);
     setMessage('');
     setSelectedFile(null);
   };
@@ -61,7 +68,7 @@ export const TextMessageBoxFile = ({ onSendMessage, placeholder, disableCorrecti
         </div>
       </div>
       <div className="ml-4">
-        <button type="submit" className="btn-primary" disabled={!selectedFile}>
+        <button type="submit" className="btn-primary" disabled={!selectedFile && !neverDisableSendButton}>
           {!selectedFile ? (
             <span className="mr-2">Send</span>
           ) : (

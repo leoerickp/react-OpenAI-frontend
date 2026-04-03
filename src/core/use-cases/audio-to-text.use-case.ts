@@ -2,7 +2,6 @@ import { api } from "../../config";
 import { type Transcription, type TranscriptionResponse } from "../../interfaces";
 
 export const audioToTextUseCase = async(audioFile: File, prompt?: string): Promise<Transcription> => {
-  console.log({prompt, audioFile});
   try {
       const formData = new FormData();
       formData.append('file', audioFile);

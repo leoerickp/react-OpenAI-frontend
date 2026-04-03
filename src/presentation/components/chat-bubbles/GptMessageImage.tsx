@@ -1,10 +1,13 @@
+import Markdown from 'react-markdown';
+
 interface Props {
   imageUrl: string;
   alt: string;
   onImageSelected?: (imageUrl: string) => void;
+  text?: string;
 }
 
-export const GptMessageImage = ({ imageUrl, alt, onImageSelected }: Props) => {
+export const GptMessageImage = ({ imageUrl, alt, onImageSelected, text }: Props) => {
   return (
     <div className="col-start-1 col-end-9 p-3 rounded-lg">
       <div className="flex flex-row items-start">
@@ -16,6 +19,7 @@ export const GptMessageImage = ({ imageUrl, alt, onImageSelected }: Props) => {
             className={`rounded-xl w-96 h-96 object-cover ${onImageSelected && 'cursor-pointer hover:scale-105 transition-all duration-300'}`}
             onClick={() => onImageSelected && onImageSelected(imageUrl)}
           />
+          {text && <Markdown>{text}</Markdown>}
         </div>
       </div>
     </div>
