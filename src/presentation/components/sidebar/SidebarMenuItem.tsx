@@ -18,7 +18,7 @@ export const SidebarMenuItem = ({ to, icon, title, description }: Props) => {
       <i className={`${icon} text-2xl mr-2 text-cyan-400`}></i>
       <div className="flex flex-col grow">
         <span className="font-semibold text-lg">{title}</span>
-        <span className="text-gray-400 text-sm">{description}</span>
+        <span className="text-gray-400 text-xs">{description}</span>
       </div>
     </NavLink>
   );

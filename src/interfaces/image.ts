@@ -10,3 +10,13 @@ export interface ImageGenerationResponse {
   openAIUrl: string;
   revisedPrompt: string;
 }
+
+export interface ImageToText {
+  ok: boolean;
+  url: string;
+  message: string;
+}
+export interface ImageToTextResponse {
+  url: string;
+  message: string;
+}

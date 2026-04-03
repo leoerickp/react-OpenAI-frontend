@@ -8,3 +8,4 @@ export * from './useAudioToText';
 export * from './useImageGeneration';
 export * from './useImageTunning';
 export * from './useAssistant';
+export * from './useImageToText';

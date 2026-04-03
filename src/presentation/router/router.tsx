@@ -9,6 +9,7 @@ import {
   AssistantPage,
   ImageGenerationPage,
   ImageTunningPage,
+  ImageToTextPage,
 } from '../pages';
 import { DashboardLayout } from '../layouts/DashboardLayout';
 
@@ -68,6 +69,13 @@ export const menuRoutes = [
     title: 'Editar imagen',
     description: 'Generación continua',
     component: <ImageTunningPage />,
+  },
+  {
+    to: '/image-to-text',
+    icon: 'fa-solid fa-message',
+    title: 'Imagen a texto',
+    description: 'Generar texto a partir de imagen',
+    component: <ImageToTextPage />,
   },
   {
     to: '/assistant',

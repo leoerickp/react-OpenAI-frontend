@@ -47,13 +47,13 @@ export const useAssistant = () => {
     setMessages(prev => [...prev, { id: generateId(), text, isGpt: false }]);
 
     if (!threadId) return;
-    const replies = await postQuestionUseCase(threadId, text);
+    const resp = await postQuestionUseCase(threadId, text);
     setIsLoading(false);
 
-    if (replies && replies.ok && replies.message) {
-      replies.message.forEach(reply => {
-        const content = reply.content.join(' ');
-        setMessages(prev => [...prev, { id: generateId(), text: content, isGpt: reply.role === 'assistant' }]);
+    if (resp && resp.ok && resp.message) {
+      resp.message.forEach(message => {
+        const content = message.content.join(' ');
+        setMessages(prev => [...prev, { id: generateId(), text: content, isGpt: message.role === 'assistant' }]);
       });
     }
   };
